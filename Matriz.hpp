@@ -14,12 +14,7 @@ public:
   Matrix& zeros(); // modifica todos os elementos para o valor zero
   Matrix& ones (); // modifica todos elementos para o valor um
   Matrix& operator=(const Matrix&); // operador de copia
-
-  /* A(2,1) = 10 */
-  double& operator()(int, int, double);(double, double) /* operador()??
-                                                        A(2,1)
-                      A.pos[2][1]=10; // altera o valor de uma posição de A
-                                                                          */
+  double& operator()(const int&,const int&); // retorna elemento pos[x][y] 
   Matrix  operator+ (const Matrix&);  // retorna soma de matrizes
   Matrix  operator- (const Matrix&);  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
