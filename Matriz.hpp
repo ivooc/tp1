@@ -21,7 +21,7 @@ public:
   Matrix& ones (); // modifica todos elementos para o valor um
   Matrix& operator=(const Matrix&); // operador de copia
   double& operator()(const int&,const int&); // retorna elemento pos[x][y]
-  Matrix  operator+ (const Matrix&);  // retorna soma de matrizes
+  Matrix  operator+ (const Matrix&) const;  // retorna soma de matrizes
   Matrix  operator- (const Matrix&);  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
   Matrix& operator-=(const Matrix&);  // subtrai matriz em si mesma

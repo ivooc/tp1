@@ -49,7 +49,19 @@ Matrix& Matrix::zeros()
     return *this;
 }
 
-Matrix  Matrix::operator+ (const Matrix&){}
+Matrix Matrix::operator+(const Matrix& m) const
+{
+    if (rows == m.rows && cols == m.cols){
+        Matrix result(rows, cols, 0);
+        for (int i = 0; i < (rows*cols); i++){
+            result.pos[i] = pos[i] + m.pos[i];
+        }
+        return result; // necessita do construtor de cópia implementado para funcionar
+    }
+    else{
+        return null;
+    }
+}
 Matrix& Matrix::operator+=(const Matrix&){}
 bool    Matrix::operator==(const Matrix&){}
 Matrix& Matrix::operator*=(const Matrix&){}
