@@ -58,12 +58,34 @@ Matrix Matrix::operator+(const Matrix& m) const
         }
         return result; // necessita do construtor de cópia implementado para funcionar
     }
-    else{
+    else
         return null;
-    }
 }
-Matrix& Matrix::operator+=(const Matrix&){}
-bool    Matrix::operator==(const Matrix&){}
+
+Matrix& Matrix::operator+=(const Matrix& m)
+{
+    if (rows == m.rows && cols == m.cols){
+        for (int i = 0; i < (rows*cols); i++){
+            pos[i] += m.pos[i];
+        }
+    }
+    return *this;
+}
+
+bool Matrix::operator==(const Matrix& m)
+{
+    if (rows == m.rows && cols == m.cols){
+        for (int i = 0; i < (rows*cols); i++){
+            if (pos[i] == m.pos[i])
+                continue;
+            else
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 Matrix& Matrix::operator*=(const Matrix&){}
 Matrix& Matrix::operator*=(const double&){}
 friend  ostream& operator<< (ostream&, const Matrix&){}
