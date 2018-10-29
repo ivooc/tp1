@@ -1,6 +1,10 @@
 #ifndef _TPPOO_MATRIZ__
 #define _TPPOO_MATRIZ__
 
+#include <iostream>
+
+using namespace std;
+
 class Matrix{
   int rows;  // numero de linhas
   int cols;  // numero de colunas
@@ -14,7 +18,7 @@ class Matrix{
 public:
   Matrix(int = 0, int = 0, const double &value = 0); // construtor generico default
   Matrix(const Matrix&); // construtor de copia
-  int getRows() const { return rows }; // devolve numero de linhas
+  int getRows() const { return rows; } // devolve numero de linhas
   int getCols() const { return cols; } // devolve numero de colunas
   Matrix& unit (); // inicializa matriz com a matriz identidade
   Matrix& zeros(); // modifica todos os elementos para o valor zero
@@ -25,7 +29,7 @@ public:
   Matrix  operator- (const Matrix&) const;  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
   Matrix& operator-=(const Matrix&);  // subtrai matriz em si mesma
-  Matrix& operator=~(const Matrix&);  // transp�e matriz
+  Matrix& operator~ ();  // transp�e matriz
   Matrix& operator*=(const double&);  // multiplica��o escalar da propria matriz em si mesma
   Matrix& operator*=(const Matrix&);  // multiplica��o vetorial de matrizes em si mesma
   Matrix  operator* (const Matrix&) const;  // multiplica��o
