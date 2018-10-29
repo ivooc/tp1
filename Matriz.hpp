@@ -15,22 +15,22 @@ public:
   Matrix(int = 0, int = 0, const double &value = 0); // construtor generico default
   Matrix(const Matrix&); // construtor de copia
   int getRows() const { return rows }; // devolve numero de linhas
-  int getCols() const; // devolve numero de colunas
+  int getCols() const { return cols; } // devolve numero de colunas
   Matrix& unit (); // inicializa matriz com a matriz identidade
   Matrix& zeros(); // modifica todos os elementos para o valor zero
   Matrix& ones (); // modifica todos elementos para o valor um
   Matrix& operator=(const Matrix&); // operador de copia
   double& operator()(const int&,const int&); // retorna elemento pos[x][y]
   Matrix  operator+ (const Matrix&) const;  // retorna soma de matrizes
-  Matrix  operator- (const Matrix&);  // retorna subtrai matirzes
+  Matrix  operator- (const Matrix&) const;  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
   Matrix& operator-=(const Matrix&);  // subtrai matriz em si mesma
-  Matrix& operator=~(const Matrix&);  // transpõe matriz
-  Matrix& operator*=(const double&);  // multiplicação escalar da propria matriz em si mesma
-  Matrix& operator*=(const Matrix&);  // multiplicação vetorial de matrizes em si mesma
-  Matrix  operator* (const Matrix&);  // multiplicação
+  Matrix& operator=~(const Matrix&);  // transpï¿½e matriz
+  Matrix& operator*=(const double&);  // multiplicaï¿½ï¿½o escalar da propria matriz em si mesma
+  Matrix& operator*=(const Matrix&);  // multiplicaï¿½ï¿½o vetorial de matrizes em si mesma
+  Matrix  operator* (const Matrix&) const;  // multiplicaï¿½ï¿½o
   bool    operator==(const Matrix&);  // comparador de igualdade de matrizes
-  bool    operator!=(const Matrix&);  // comparador de diferença de matrizes
+  bool    operator!=(const Matrix&);  // comparador de diferenï¿½a de matrizes
   friend ostream& operator<< (ostream&, const Matrix&);  // imprime a matriz
   friend istream& operator>> (istream&, Matrix&);  // entra a matriz
   ~Matrix(); // destroi a matriz
