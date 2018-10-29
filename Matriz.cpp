@@ -76,9 +76,7 @@ bool Matrix::operator==(const Matrix& m)
 {
     if (rows == m.rows && cols == m.cols){
         for (int i = 0; i < (rows*cols); i++){
-            if (pos[i] == m.pos[i])
-                continue;
-            else
+            if (pos[i] != m.pos[i])
                 return false;
         }
         return true;
@@ -86,9 +84,9 @@ bool Matrix::operator==(const Matrix& m)
     return false;
 }
 
-Matrix& Matrix::operator*=(const Matrix&){}
-Matrix& Matrix::operator*=(const double&){}
-friend  ostream& operator<< (ostream&, const Matrix&){}
+Matrix& Matrix::operator*=(const Matrix& m){}
+Matrix& Matrix::operator*=(const double& value){}
+friend  ostream& operator<< (ostream& out, const Matrix& m){}
 
 /* BECKER */
 Matrix::Matrix(const Matrix&){}
