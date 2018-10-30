@@ -102,10 +102,11 @@ Matrix& Matrix::operator=(const Matrix& m){
   return *this;
 }
 Matrix  Matrix::operator- (const Matrix& m) const{
-  if (rows!=m.getRows() || cols!=m.getCols()) {return Matrix();}
   Matrix result(*this);
-  for(int ii=0; ii<cols*rows; ii++){
-    result.pos[ii]-=m.pos[ii];
+  if (rows!=m.getRows() || cols!=m.getCols()) {
+    for(int ii=0; ii<cols*rows; ii++){
+      result.pos[ii]-=m.pos[ii];
+    }
   }
   return result;
 }
