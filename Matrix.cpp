@@ -78,7 +78,7 @@ Matrix::Matrix(const Matrix& m){
  rows = m.getRows();
  cols = m.getCols();
  delete[] pos;
- pos = new double[rowls*cols];
+ pos = new double[rows*cols];
  for(int ii = 0; ii<m.getRows()*m.getCols(); ii++){
     pos[ii] = m.pos[ii];
   }
