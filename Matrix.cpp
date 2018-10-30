@@ -77,6 +77,8 @@ ostream& operator<< (ostream& out, const Matrix& m){}
 Matrix::Matrix(const Matrix& m){
  rows = m.getRows();
  cols = m.getCols();
+ delete[] pos;
+ pos = new double[rowls*cols];
  for(int ii = 0; ii<m.getRows()*m.getCols(); ii++){
     pos[ii] = m.pos[ii];
   }
