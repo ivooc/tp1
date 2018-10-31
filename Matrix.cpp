@@ -29,18 +29,18 @@ Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
             if (getIndexRow(i) == getIndexCol(i))
-                setValueAt(i, 1);
+                pos[i] = 1;
             else
-                setValueAt(i, 0);
+                pos[i] = 0;
         }
     return *this;
 }
 Matrix& Matrix::zeros(){
     for (int i = 0; i < (rows*cols); i++)
-        setValueAt(i, 0);
+        pos[i] = 0;
     return *this;
 }
-Matrix Matrix::operator+(const Matrix& m) const{
+const Matrix Matrix::operator+(const Matrix& m) const{
     Matrix result(*this);
     if (rows == m.rows && cols == m.cols){
         for (int i = 0; i < (rows*cols); i++){
@@ -101,7 +101,7 @@ Matrix& Matrix::operator=(const Matrix& m){
   }
   return *this;
 }
-Matrix  Matrix::operator- (const Matrix& m) const{
+const Matrix  Matrix::operator- (const Matrix& m) const{
   Matrix result(*this);
   if (rows!=m.getRows() || cols!=m.getCols()) {
     for(int ii=0; ii<cols*rows; ii++){
@@ -131,7 +131,7 @@ Matrix& Matrix::operator~(){/*
     }
   }
 */  return *this;}
-Matrix  Matrix::operator* (const Matrix& m) const {}
-bool    Matrix::operator!=(const Matrix& m){}
+const Matrix Matrix::operator* (const Matrix& m) const {}
+bool Matrix::operator!=(const Matrix& m){}
 istream& operator>> (istream& op, Matrix& m){}
 Matrix::~Matrix(){}
