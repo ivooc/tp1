@@ -1,4 +1,4 @@
-#include "Matriz.hpp"
+#include "Matrix.hpp"
 
 /* IVO */
 Matrix::Matrix(int Rows, int Cols, const double &value){
@@ -9,7 +9,7 @@ Matrix::Matrix(int Rows, int Cols, const double &value){
         pos[i] = value;
 }
 
-// fun��es implementadas inline no header
+// funcoes implementadas inline no header
 
 //int Matrix::getRows(){}
 //int Matrix::index(int row, int col) const {}
@@ -29,27 +29,25 @@ Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
             if (getIndexRow(i) == getIndexCol(i))
-                setValueAt(i, 1);
+                pos[i] = 1;
             else
-                setValueAt(i, 0);
+                pos[i] = 0;
         }
     return *this;
 }
 Matrix& Matrix::zeros(){
     for (int i = 0; i < (rows*cols); i++)
-        setValueAt(i, 0);
+        pos[i] = 0;
     return *this;
 }
-Matrix Matrix::operator+(const Matrix& m) const{
+const Matrix Matrix::operator+(const Matrix& m) const{
+    Matrix result(*this);
     if (rows == m.rows && cols == m.cols){
-        Matrix result(rows, cols, 0);
         for (int i = 0; i < (rows*cols); i++){
-            result.pos[i] = pos[i] + m.pos[i];
+            result.pos[i] += m.pos[i];
         }
-        return result; // necessita do construtor de c�pia implementado para funcionar
     }
-    else
-        return Matrix();
+    return result;
 }
 Matrix& Matrix::operator+=(const Matrix& m){
     if (rows == m.rows && cols == m.cols){
@@ -69,19 +67,35 @@ bool Matrix::operator==(const Matrix& m){
     }
     return false;
 }
-Matrix& Matrix::operator*=(const Matrix& m){}
+Matrix& Matrix::operator*=(const Matrix& m){
+    if (cols == m.rows){
+        Matrix aux(*this);
+        if (rows != m.rows || cols != m.cols){
+            cols = m.cols;
+            delete[] pos;
+            pos = new double[rows*cols];
+        }
+        zeros();
+        for (int rowLeft = 0; rowLeft < aux.rows; rowLeft++)
+            for (int colRight = 0; colRight < m.cols; colRight++)
+                for (int element = 0; element < aux.cols; element++)
+                    pos[index(rowLeft, colRight)] +=
+                        aux.pos[index(rowsLeft, element)] * m.pos[index(element, colsRight)];
+
+    }
+    return *this;
+}
 Matrix& Matrix::operator*=(const double& value){}
 ostream& operator<< (ostream& out, const Matrix& m){}
 
 /* BECKER */
 Matrix::Matrix(const Matrix& m){
- rows = m.getRows();
- cols = m.getCols();
- delete[] pos;
- pos = new double[rows*cols];
- for(int ii = 0; ii<m.getRows()*m.getCols(); ii++){
-    pos[ii] = m.pos[ii];
-  }
+    rows = m.getRows();
+    cols = m.getCols();
+    pos = new double[rows*cols];
+    for(int ii = 0; ii<m.getRows()*m.getCols(); ii++){
+        pos[ii] = m.pos[ii];
+    }
 }
 Matrix& Matrix::ones (){
   for(int ii = 0; ii<rows*cols; ii++){
@@ -90,22 +104,23 @@ Matrix& Matrix::ones (){
   return *this;
 }
 double& Matrix::operator()(const int& r, const int& c){
-  return pos[index(r,c)];
+  return pos[index(r-1,c-1)];
 }
 Matrix& Matrix::operator=(const Matrix& m){
-  if (this == &m) return *this;
-  delete[] pos;
-  rows = m.getRows();
-  cols = m.getCols();
-  pos = new double[rows*cols];
-  for (int ii = 0; ii<rows*cols; ii++){
-    pos[ii] = m.pos[ii];
+  if (this != &m) {
+    delete[] pos;
+    rows = m.getRows();
+    cols = m.getCols();
+    pos = new double[rows*cols];
+    for (int ii = 0; ii<rows*cols; ii++){
+        pos[ii] = m.pos[ii];
+    }
   }
   return *this;
 }
-Matrix  Matrix::operator- (const Matrix& m) const{
+const Matrix  Matrix::operator- (const Matrix& m) const{
   Matrix result(*this);
-  if (rows!=m.getRows() || cols!=m.getCols()) {
+  if (rows==m.getRows() || cols==m.getCols()) {
     for(int ii=0; ii<cols*rows; ii++){
       result.pos[ii]-=m.pos[ii];
     }
@@ -113,7 +128,7 @@ Matrix  Matrix::operator- (const Matrix& m) const{
   return result;
 }
 Matrix& Matrix::operator-=(const Matrix& m){
-  if (rows!=m.getRows() || cols!=m.getCols()){
+  if (rows==m.getRows() || cols==m.getCols()){
     for(int ii=0; ii<cols*rows; ii++){
       pos[ii]-=m.pos[ii];
     }
@@ -121,19 +136,51 @@ Matrix& Matrix::operator-=(const Matrix& m){
   return *this;
 
 }
-Matrix& Matrix::operator~(){/*
-  cols=m.getCols();
-  rows=m.getRows();
-  delete[] pos;
-  pos = new double[rows*cols];
-  for(int ii=0, ii< rows, ii++){
-    for(int jj = 0, jj<=cols, jj++){
-      *this(ii,jj) = m(jj,ii);
-      *this(jj,ii) = m(ii,jj);
+Matrix& Matrix::operator~(){
+  double aux;
+  for(int ii=0; ii< rows; ii++){
+    for(int jj = 0; jj<ii; jj++){
+        aux =  pos[index(jj,ii)];
+        pos[index(jj,ii)] = pos[index(ii,jj)];
+        pos[index(ii,jj)] = aux;
     }
   }
-*/  return *this;}
-Matrix  Matrix::operator* (const Matrix& m) const {}
-bool    Matrix::operator!=(const Matrix& m){}
-istream& operator>> (istream& op, Matrix& m){}
-Matrix::~Matrix(){}
+  return *this;
+}
+const Matrix Matrix::operator* (const Matrix& m) const {
+    if(cols!=m.getRows()  ){ return *this; }
+    int _r = getRows();
+    int _c = m.getCols();
+    Matrix result( _r, _c);
+    // Percorre matrix resultante
+    for(int rr = 0; rr<_r ; rr++){
+        for(int cc = 0; cc<_c ; cc++)
+            // Percorre vetores originais
+            for (int iter = 0; iter ;iter++){
+                result.pos[index(rr,cc)]+=
+                        pos[index(_r,iter)]*m.pos[index(_c,iter)];
+            }
+    }
+    return result;
+}
+bool Matrix::operator!=(const Matrix& m){
+    if(getCols()!=m.getCols()){ return false; }
+    if(getRows()!=m.getRows()){ return false; }
+    for(int ii = 0; ii<getRows(); ii++){
+        for(int jj = 0; jj<getCols(); jj++){
+            if( pos[index(ii,jj)] != m.pos[index(ii,jj)] ){
+                return false; 
+            }
+        }
+    }
+    return true;
+}
+istream& operator>> (istream& op, Matrix& m){
+    for(int ii = 0; ii<m.getCols()*m.getRows(); ii++){
+        op>>m.pos[ii];
+    }
+    return op;
+}
+Matrix::~Matrix(){
+    delete[] pos;
+}
