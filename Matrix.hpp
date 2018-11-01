@@ -25,16 +25,16 @@ public:
   Matrix& ones (); // modifica todos elementos para o valor um
   Matrix& operator=(const Matrix&); // operador de copia
   double& operator()(const int&,const int&); // retorna elemento pos[x][y]
-  Matrix  operator+ (const Matrix&) const;  // retorna soma de matrizes
-  Matrix  operator- (const Matrix&) const;  // retorna subtrai matirzes
+  const Matrix  operator+ (const Matrix&) const;  // retorna soma de matrizes
+  const Matrix  operator- (const Matrix&) const;  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
   Matrix& operator-=(const Matrix&);  // subtrai matriz em si mesma
   Matrix& operator~ ();  // transp�e matriz
-  Matrix& operator*=(const double&);  // multiplica��o escalar da propria matriz em si mesma
-  Matrix& operator*=(const Matrix&);  // multiplica��o vetorial de matrizes em si mesma
-  Matrix  operator* (const Matrix&) const;  // multiplica��o
+  Matrix& operator*=(const double&);  // multiplicacao escalar da propria matriz em si mesma
+  Matrix& operator*=(const Matrix&);  // multiplicacao vetorial de matrizes em si mesma
+  const Matrix  operator* (const Matrix&) const;  // multiplicacao
   bool    operator==(const Matrix&);  // comparador de igualdade de matrizes
-  bool    operator!=(const Matrix&);  // comparador de diferen�a de matrizes
+  bool    operator!=(const Matrix&);  // comparador de diferenca de matrizes
   friend ostream& operator<< (ostream&, const Matrix&);  // imprime a matriz
   friend istream& operator>> (istream&, Matrix&);  // entra a matriz
   ~Matrix(); // destroi a matriz

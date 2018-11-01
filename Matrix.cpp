@@ -1,4 +1,4 @@
-#include "Matriz.hpp"
+#include "Matrix.hpp"
 
 /* IVO */
 Matrix::Matrix(int Rows, int Cols, const double &value){
@@ -9,7 +9,7 @@ Matrix::Matrix(int Rows, int Cols, const double &value){
         pos[i] = value;
 }
 
-// fun��es implementadas inline no header
+// funcoes implementadas inline no header
 
 //int Matrix::getRows(){}
 //int Matrix::index(int row, int col) const {}
@@ -29,27 +29,25 @@ Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
             if (getIndexRow(i) == getIndexCol(i))
-                setValueAt(i, 1);
+                pos[i] = 1;
             else
-                setValueAt(i, 0);
+                pos[i] = 0;
         }
     return *this;
 }
 Matrix& Matrix::zeros(){
     for (int i = 0; i < (rows*cols); i++)
-        setValueAt(i, 0);
+        pos[i] = 0;
     return *this;
 }
-Matrix Matrix::operator+(const Matrix& m) const{
+const Matrix Matrix::operator+(const Matrix& m) const{
+    Matrix result(*this);
     if (rows == m.rows && cols == m.cols){
-        Matrix result(rows, cols, 0);
         for (int i = 0; i < (rows*cols); i++){
-            result.pos[i] = pos[i] + m.pos[i];
+            result.pos[i] += m.pos[i];
         }
-        return result; // necessita do construtor de c�pia implementado para funcionar
     }
-    else
-        return Matrix();
+    return result;
 }
 Matrix& Matrix::operator+=(const Matrix& m){
     if (rows == m.rows && cols == m.cols){
@@ -103,7 +101,7 @@ Matrix& Matrix::operator=(const Matrix& m){
   }
   return *this;
 }
-Matrix  Matrix::operator- (const Matrix& m) const{
+const Matrix  Matrix::operator- (const Matrix& m) const{
   Matrix result(*this);
   if (rows!=m.getRows() || cols!=m.getCols()) {
     for(int ii=0; ii<cols*rows; ii++){
@@ -133,7 +131,7 @@ Matrix& Matrix::operator~(){/*
     }
   }
 */  return *this;}
-Matrix  Matrix::operator* (const Matrix& m) const {}
-bool    Matrix::operator!=(const Matrix& m){}
+const Matrix Matrix::operator* (const Matrix& m) const {}
+bool Matrix::operator!=(const Matrix& m){}
 istream& operator>> (istream& op, Matrix& m){}
 Matrix::~Matrix(){}
