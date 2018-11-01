@@ -67,7 +67,24 @@ bool Matrix::operator==(const Matrix& m){
     }
     return false;
 }
-Matrix& Matrix::operator*=(const Matrix& m){}
+Matrix& Matrix::operator*=(const Matrix& m){
+    if (cols == m.rows){
+        Matrix aux(*this);
+        if (rows != m.rows || cols != m.cols){
+            cols = m.cols;
+            delete[] pos;
+            pos = new double[rows*cols];
+        }
+        zeros();
+        for (int rowLeft = 0; rowLeft < aux.rows; rowLeft++)
+            for (int colRight = 0; colRight < m.cols; colRight++)
+                for (int element = 0; element < aux.cols; element++)
+                    pos[index(rowLeft, colRight)] +=
+                        aux.pos[index(rowsLeft, element)] * m.pos[index(element, colsRight)];
+
+    }
+    return *this;
+}
 Matrix& Matrix::operator*=(const double& value){}
 ostream& operator<< (ostream& out, const Matrix& m){}
 
@@ -134,4 +151,6 @@ Matrix& Matrix::operator~(){/*
 const Matrix Matrix::operator* (const Matrix& m) const {}
 bool Matrix::operator!=(const Matrix& m){}
 istream& operator>> (istream& op, Matrix& m){}
-Matrix::~Matrix(){}
+//Matrix::~Matrix(){
+    //delete[] pos;
+//}

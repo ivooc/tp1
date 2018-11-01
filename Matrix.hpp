@@ -37,7 +37,7 @@ public:
   bool    operator!=(const Matrix&);  // comparador de diferenca de matrizes
   friend ostream& operator<< (ostream&, const Matrix&);  // imprime a matriz
   friend istream& operator>> (istream&, Matrix&);  // entra a matriz
-  ~Matrix(); // destroi a matriz
+  ~Matrix() { delete[] pos; }; // destroi a matriz
 };
 
 #endif

@@ -4,10 +4,10 @@ using namespace std;
 
 int main (){
 
-  Matriz Y;
-  Matriz X(3,1), A(3,3), C(3,3);
-  Matriz W = C;
-  Matriz Z(A);
+  Matrix Y;
+  Matrix X(3,1), A(3,3), C(3,3);
+  Matrix W = C;
+  Matrix Z(A);
   int numeroLinhas = A.getRows();
   Int numeroColunas = A.getCols();
   Y.unit(); // inicializa Y com a matriz identidade
