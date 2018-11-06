@@ -1,15 +1,15 @@
 #include <iostream>
+#include "Matrix.hpp"
 
 using namespace std;
 
 int main (){
-
-  Matriz Y;
-  Matriz X(3,1), A(3,3), C(3,3);
-  Matriz W = C;
-  Matriz Z(A);
+  Matrix Y;
+  Matrix X(3,1), A(3,3), C(3,3);
+  Matrix W = C;
+  Matrix Z(A);
   int numeroLinhas = A.getRows();
-  Int numeroColunas = A.getCols();
+  int numeroColunas = A.getCols();
   Y.unit(); // inicializa Y com a matriz identidade
   A(2,1)=10; // altera o valor de uma posição de A
   Y.zeros(); // modifica todos os elementos de Y para o valor zero
@@ -22,10 +22,10 @@ int main (){
   X*=2; // multiplicação por uma constante
   C=A*X; // multiplicação de matrizes
   C*=X; // multiplicação de matrizes
-  if (A == C) // verifica a igualdade entre A e C
-  if(X != Y) // verifica a desigualdade entre A e C
-  cout << C << endl; // Impressão de matrizes
-  cin >> Y // leitura de dados para dentro da matriz Y
-
+  if (A == C); // verifica a igualdade entre A e C
+  if(X != Y); // verifica a desigualdade entre A e C
+  //cout << C << endl; // Impressão de matrizes
+  cin >> Y; // leitura de dados para dentro da matriz Y
+  
   return 0 ;
 }

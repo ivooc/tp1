@@ -29,7 +29,7 @@ public:
   const Matrix  operator- (const Matrix&) const;  // retorna subtrai matirzes
   Matrix& operator+=(const Matrix&);  // soma matriz em si mesma
   Matrix& operator-=(const Matrix&);  // subtrai matriz em si mesma
-  Matrix& operator~ ();  // transp�e matriz
+  Matrix& operator~() ;  // transp�e matriz
   Matrix& operator*=(const double&);  // multiplicacao escalar da propria matriz em si mesma
   Matrix& operator*=(const Matrix&);  // multiplicacao vetorial de matrizes em si mesma
   const Matrix  operator* (const Matrix&) const;  // multiplicacao
