@@ -2,6 +2,7 @@
 #define _TPPOO_MATRIZ__
 
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ class Matrix{
   void setValueAt(int row, int col, const double &value);
   void setValueAt(int index, const double &value);
 public:
-  Matrix(int = 0, int = 0, const double &value = 0); // construtor generico default
+  Matrix(int = 0, int = 0, const double& = 0.0); // construtor generico default
   Matrix(const Matrix&); // construtor de copia
   int getRows() const { return rows; } // devolve numero de linhas
   int getCols() const { return cols; } // devolve numero de colunas
