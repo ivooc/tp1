@@ -22,7 +22,12 @@ int main (){
   X*=2; // multiplicação por uma constante
   C=A*X; // multiplicação de matrizes
   C*=X; // multiplicação de matrizes
-  if (A == C); // verifica a igualdade entre A e C
+  if (A == C){// verifica a igualdade entre A e C
+    cout << "A == C"<<endl;
+  }
+  else{
+    cout <<"A != C"<<endl;
+  }
   if(X != Y); // verifica a desigualdade entre A e C
   //cout << C << endl; // Impressão de matrizes
   cin >> Y; // leitura de dados para dentro da matriz Y
