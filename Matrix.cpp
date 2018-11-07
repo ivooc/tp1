@@ -158,33 +158,31 @@ const Matrix Matrix::operator* (const Matrix& m) const {
     Matrix result( _r, _c);
     // Percorre matrix resultante
     for(int rr = 0; rr<_r ; rr++){
-        for(int cc = 0; cc<_c ; cc++)
+        for(int cc = 0; cc<_c ; cc++){
             // Percorre vetores originais
             for (int iter = 0; iter ;iter++){
                 result.pos[index(rr,cc)]+=
                         pos[index(_r,iter)]*m.pos[index(_c,iter)];
             }
+        }
     }
     return result;
 }
 bool Matrix::operator!=(const Matrix& m){
-    if(getCols()!=m.getCols()){ return false; }
-    if(getRows()!=m.getRows()){ return false; }
+    if(getCols()!=m.getCols()){ return true; }
+    if(getRows()!=m.getRows()){ return true; }
     for(int ii = 0; ii<getRows(); ii++){
         for(int jj = 0; jj<getCols(); jj++){
             if( pos[index(ii,jj)] != m.pos[index(ii,jj)] ){
-                return false;
+                return true;
             }
         }
     }
-    return true;
+    return false;
 }
 istream& operator>> (istream& op, Matrix& m){
     for(int ii = 0; ii<m.getCols()*m.getRows(); ii++){
         op>>m.pos[ii];
     }
     return op;
-}
-Matrix::~Matrix(){
-    delete[] pos;
 }

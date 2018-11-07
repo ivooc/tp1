@@ -12,7 +12,9 @@ int main (){
   int numeroLinhas = A.getRows();
   int numeroColunas = A.getCols();
   Y.unit(); // inicializa Y com a matriz identidade
+  A.ones();
   A(2,1)=10; // altera o valor de uma posição de A
+  cout<<A;
   Y.zeros(); // modifica todos os elementos de Y para o valor zero
   C=A+A; // Soma
   C-=A; // Subtração
@@ -23,7 +25,12 @@ int main (){
   X*=2; // multiplicação por uma constante
   C=A*X; // multiplicação de matrizes
   C*=X; // multiplicação de matrizes
-  if (A == C); // verifica a igualdade entre A e C
+  if (A == C){// verifica a igualdade entre A e C
+    cout << "A == C"<<endl;
+  }
+  else{
+    cout <<"A != C"<<endl;
+  }
   if(X != Y); // verifica a desigualdade entre A e C
   //cout << C << endl; // Impressão de matrizes
   cin >> Y; // leitura de dados para dentro da matriz Y
