@@ -12,7 +12,9 @@ int main (){
   int numeroLinhas = A.getRows();
   int numeroColunas = A.getCols();
   Y.unit(); // inicializa Y com a matriz identidade
+  A.ones();
   A(2,1)=10; // altera o valor de uma posição de A
+  cout<<A;
   Y.zeros(); // modifica todos os elementos de Y para o valor zero
   C=A+A; // Soma
   C-=A; // Subtração
