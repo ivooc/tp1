@@ -29,15 +29,15 @@ Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
             if (getIndexRow(i) == getIndexCol(i))
-                pos[i] = 1;
+                pos[i] = 1.0;
             else
-                pos[i] = 0;
+                pos[i] = 0.0;
         }
     return *this;
 }
 Matrix& Matrix::zeros(){
     for (int i = 0; i < (rows*cols); i++)
-        pos[i] = 0;
+        pos[i] = 0.0;
     return *this;
 }
 const Matrix Matrix::operator+(const Matrix& m) const{
@@ -67,9 +67,38 @@ bool Matrix::operator==(const Matrix& m){
     }
     return false;
 }
-Matrix& Matrix::operator*=(const Matrix& m){}
-Matrix& Matrix::operator*=(const double& value){}
-ostream& operator<< (ostream& out, const Matrix& m){}
+Matrix& Matrix::operator*=(const Matrix& m){
+    if (cols == m.rows){
+        Matrix aux(*this);
+        if (rows != m.rows || cols != m.cols){
+            cols = m.cols;
+            if (pos != nullptr) delete[] pos;
+            pos = new double[rows*cols];
+        }
+        zeros();
+        for (int rowLeft = 0; rowLeft < aux.rows; rowLeft++)
+            for (int colRight = 0; colRight < m.cols; colRight++)
+                for (int element = 0; element < aux.cols; element++)
+                    pos[index(rowLeft, colRight)] +=
+                        aux.pos[index(rowLeft, element)] * m.pos[index(element, colRight)];
+
+    }
+    return *this;
+}
+Matrix& Matrix::operator*=(const double& value){
+    for (int i = 0; i < (rows*cols); i++)
+        pos[i] *= value;
+    return *this;
+}
+ostream& operator<< (ostream& out, const Matrix& m){
+    out << setprecision(1) << fixed;
+    for (int i = 0; i < (m.rows*m.cols); i++){
+        if (m.getIndexCol(i) == 0) out << "| ";
+        out << m.pos[i] << " ";
+        if (m.getIndexCol(i) == (m.cols - 1)) out << "|" << endl;
+    }
+    return out;
+}
 
 /* BECKER */
 Matrix::Matrix(const Matrix& m){
