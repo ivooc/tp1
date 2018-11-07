@@ -17,14 +17,6 @@ Matrix::Matrix(int Rows, int Cols, const double &value){
 //int Matrix::getIndexRow (int index) const {}
 //double Matrix::getValueAt(int row, int col) const {}
 
-void Matrix::setValueAt(int row, int col, const double &value){
-    if (col < cols && row < rows)
-        pos[index(row, col)] = value;
-}
-void Matrix::setValueAt(int index, const double &value){
-    if (index < (rows*cols))
-        pos[index] = value;
-}
 Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
@@ -132,7 +124,7 @@ Matrix& Matrix::operator=(const Matrix& m){
 }
 const Matrix  Matrix::operator- (const Matrix& m) const{
   Matrix result(*this);
-  if (rows==m.getRows() || cols==m.getCols()) {
+  if (rows==m.getRows() && cols==m.getCols()) {
     for(int ii=0; ii<cols*rows; ii++){
       result.pos[ii]-=m.pos[ii];
     }
@@ -140,7 +132,7 @@ const Matrix  Matrix::operator- (const Matrix& m) const{
   return result;
 }
 Matrix& Matrix::operator-=(const Matrix& m){
-  if (rows==m.getRows() || cols==m.getCols()){
+  if (rows==m.getRows() && cols==m.getCols()){
     for(int ii=0; ii<cols*rows; ii++){
       pos[ii]-=m.pos[ii];
     }
@@ -181,7 +173,7 @@ bool Matrix::operator!=(const Matrix& m){
     for(int ii = 0; ii<getRows(); ii++){
         for(int jj = 0; jj<getCols(); jj++){
             if( pos[index(ii,jj)] != m.pos[index(ii,jj)] ){
-                return false; 
+                return false;
             }
         }
     }
