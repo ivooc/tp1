@@ -8,15 +8,6 @@ Matrix::Matrix(int Rows, int Cols, const double &value){
     for (int i = 0; i < (rows*cols); i++)
         pos[i] = value;
 }
-
-// funcoes implementadas inline no header
-
-//int Matrix::getRows(){}
-//int Matrix::index(int row, int col) const {}
-//int Matrix::getIndexCol (int index) const {}
-//int Matrix::getIndexRow (int index) const {}
-//double Matrix::getValueAt(int row, int col) const {}
-
 Matrix& Matrix::unit(){
     if (rows == cols)
         for (int i = 0; i < (rows*cols); i++){
