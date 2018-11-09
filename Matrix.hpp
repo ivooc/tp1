@@ -13,9 +13,6 @@ class Matrix{
   int index(int row, int col) const { return col + cols * row; }
   int getIndexCol (int index) const { return index % cols; }
   int getIndexRow (int index) const { return index / cols; }
-  double getValueAt(int row, int col) const { return pos[index(row, col)]; }
-  void setValueAt(int row, int col, const double &value);
-  void setValueAt(int index, const double &value);
 public:
   Matrix(int = 0, int = 0, const double& = 0.0); // construtor generico default
   Matrix(const Matrix&); // construtor de copia
