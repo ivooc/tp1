@@ -6,15 +6,16 @@ using namespace std;
 int main (){
 
   Matrix Y;
-  Matrix X(3,1), A(3,3), C(3,3);
+  Matrix X(3,1), A(3,3), B(4,4,5), C(3,3);
   Matrix W = C;
   Matrix Z(A);
   int numeroLinhas = A.getRows();
   int numeroColunas = A.getCols();
-  Y.unit(); // inicializa Y com a matriz identidade
-  A.ones();
+  cout << numeroLinhas << endl;
+  cout << numeroColunas << endl;
+  B.unit(); // inicializa Y com a matriz identidade
+  A.ones(); // inicializa A com 1 em todas as posicoes
   A(2,1)=10; // altera o valor de uma posição de A
-  cout<<A;
   Y.zeros(); // modifica todos os elementos de Y para o valor zero
   C=A+A; // Soma
   C-=A; // Subtração
@@ -31,9 +32,15 @@ int main (){
   else{
     cout <<"A != C"<<endl;
   }
-  if(X != Y); // verifica a desigualdade entre A e C
-  //cout << C << endl; // Impressão de matrizes
+  if(X != Y){// verifica a desigualdade entre X e Y
+    cout << "X != Y"<<endl;
+  }
+  else{
+    cout <<"X == Y"<<endl;
+  }
+  Y = W;
   cin >> Y; // leitura de dados para dentro da matriz Y
-  
+  cout << Y << endl; // Impressão de matrizes
+
   return 0 ;
 }
