@@ -18,7 +18,7 @@ public:
   Matrix(const Matrix&); // construtor de copia
   int getRows() const { return rows; } // devolve numero de linhas
   int getCols() const { return cols; } // devolve numero de colunas
-  Matrix& unit (); // inicializa matriz com a matriz identidade
+  Matrix& unit (); // transforma matriz em matriz identidade
   Matrix& zeros(); // modifica todos os elementos para o valor zero
   Matrix& ones (); // modifica todos elementos para o valor um
   Matrix& operator=(const Matrix&); // operador de copia
